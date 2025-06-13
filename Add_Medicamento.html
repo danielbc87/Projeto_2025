@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Adicionar Medicamento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="time"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: -15px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #3b82f6;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Adicionar Medicamento</h2>
+    <form id="medForm">
+      <label for="medName">Nome do Medicamento</label>
+      <input type="text" id="medName" name="medName" required>
+
+      <label for="medTime">Horário (HH:MM)</label>
+      <input type="time" id="medTime" name="medTime" required>
+
+      <div class="error" id="errorMsg"></div>
+
+      <button type="submit">Salvar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("medForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("medName").value.trim();
+      const time = document.getElementById("medTime").value;
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (!name || !time) {
+        errorMsg.textContent = "Todos os campos devem ser preenchidos.";
+        return;

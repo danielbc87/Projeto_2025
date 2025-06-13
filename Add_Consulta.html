@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Agendar Consulta</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="date"], input[type="time"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: -10px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #22c55e;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #16a34a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Agendar Consulta</h2>
+    <form id="appointmentForm">
+      <label for="doctor">Nome do Médico</label>
+      <input type="text" id="doctor" name="doctor" required>
+
+      <label for="date">Data</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Horário</label>
+      <input type="time" id="time" name="time" required>
+
+      <div class="error" id="errorMsg"></div>
+
+      <button type="submit">Salvar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("appointmentForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const doctor = document.getElementById("doctor").value.trim();
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (!doctor || !date || !time) {
+        errorMsg.textContent = "Todos os campos devem ser preenchidos.";
+        return;
+      }
+
+      const selectedDate = new Date(date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      if (selectedDate < today) {
+        errorMsg.textContent = "A data da consulta não pode ser no passado.";
+        return;
+      }
+
+      errorMsg.textContent = "";
+      alert("Consulta salva com sucesso!");
+      // Aqui você pode adicionar lógica de persistência (ex: enviar para API)
+    });
+  </script>
+</body>
+</html>

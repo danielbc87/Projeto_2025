@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Listar Registros</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #1f2937;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+
+    .record {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f9fafb;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+
+    .record-info {
+      flex-grow: 1;
+    }
+
+    .record-buttons button {
+      margin-left: 10px;
+      padding: 6px 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    .delete-btn {
+      background-color: #ef4444;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Registros</h1>
+
+    <h2>Medicamentos</h2>
+    <div id="medicationsList">
+      <!-- Registros de medicamentos serão inseridos aqui -->
+    </div>
+
+    <h2>Consultas</h2>
+    <div id="appointmentsList">
+      <!-- Registros de consultas serão inseridos aqui -->
+    </div>
+  </div>
+
+  <script>
+    const medications = [
+      { name: "Paracetamol", time: "08:00" },
+      { name: "Ibuprofeno", time: "12:00" }
+    ];
+
+    const appointments = [
+      { doctor: "Dra. Carla", date: "15/06/2025", time: "10:30" },
+      { doctor: "Dr. João", date: "20/06/2025", time: "14:00" }
+    ];
+
+    function renderList(containerId, items, type) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "record";
+
+        const info = document.createElement("div");
+        info.className = "record-info";
+
+        if (type === "medicação") {
+          info.textContent = `${item.name} - ${item.time}`;
+        } else {
+          info.textContent = `${item.doctor} - ${item.date} às ${item.time}`;
+        }
+
+        const buttons = document.createElement("div");
+        buttons.className = "record-buttons";
+
+        const editBtn = document.createElement("button");
+        editBtn.className = "edit-btn";
+        editBtn.textContent = "Editar";
+        editBtn.onclick = () => alert(`Editar ${type} ${index + 1}`);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete-btn";
+        deleteBtn.textContent = "Excluir";
+        deleteBtn.onclick = () => {
+          const confirmDelete = confirm(`Deseja excluir este ${type}?`);
+          if (confirmDelete) {
+            if (type === "medicação") {
+              medications.splice(index, 1);
+              renderList("medicationsList", medications, "medicação");
+            } else {
+              appointments.splice(index, 1);
+              renderList("appointmentsList", appointments, "appointment");
+            }
+          }
+        };
+
+        buttons.appendChild(editBtn);
+        buttons.appendChild(deleteBtn);
+
+        div.appendChild(info);
+        div.appendChild(buttons);
+
+        container.appendChild(div);
+      });
+    }
+
+    renderList("medicationsList", medications, "medicação");
+    renderList("appointmentsList", appointments, "consulta");
+  </script>
+</body>
+</html>

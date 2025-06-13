@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Health Organizer - Início</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 360px;
+    }
+
+    h1 {
+      color: #0f172a;
+      margin-bottom: 30px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: #3b82f6;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Health Organizer</h1>
+    <button onclick="navigateTo('medication')">Adicionar Medicamento</button>
+    <button onclick="navigateTo('appointment')">Agendar Consulta</button>
+    <button onclick="navigateTo('records')">Ver Registros</button>
+  </div>
+
+  <script>
+    function navigateTo(page) {
+      switch(page) {
+        case 'medication':
+           window.location.href = "Add_Medicamento.html"; // Substituir por window.location.href se necessário
+          break;
+        case 'appointment':
+          window.location.href = "Add_Consulta.html";
+          break;
+        case 'records':
+          window.location.href = "Ver_Registros.html";
+          break;
+      }
+    }
+  </script>
+  
+</body>
+</html>
